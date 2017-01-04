@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.design.widget.CoordinatorLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/black_900"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:id="@+id/board_toolbar"
+            android:layout_height="?attr/actionBarSize">
+
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/board_spinner"
+
+                android:layout_below="@+id/ins_board_text"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp" />
+
+        <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ins_state_actext"
+                android:layout_below="@+id/ins_dist_text"
+                android:layout_marginTop="8dp"
+                android:layout_alignLeft="@+id/board_spinner"
+                android:layout_alignStart="@+id/board_spinner"
+                android:layout_alignRight="@+id/board_spinner"
+                android:layout_alignEnd="@+id/board_spinner"
+                android:spinnerMode="dialog" />
+
+
+        <com.elf.elfstudent.CustomUI.HelviticaMedium
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="SELECT BOARD"
+
+            android:id="@+id/ins_board_text"
+            android:layout_marginTop="109dp"
+            android:textColor="@color/white_light"
+            android:layout_alignLeft="@+id/ins_state_actext"
+            android:layout_alignStart="@+id/ins_state_actext"
+            android:layout_marginLeft="27dp"
+            android:layout_marginStart="27dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:id="@+id/ins_finish_button"
+            android:layout_marginBottom="98dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+
+        <com.elf.elfstudent.CustomUI.HelviticaMedium
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="SELECT STATE"
+            android:id="@+id/ins_dist_text"
+            android:textColor="@color/white_light"
+            android:layout_marginTop="76dp"
+            android:layout_below="@+id/board_spinner"
+            android:layout_alignLeft="@+id/ins_board_text"
+            android:layout_alignStart="@+id/ins_board_text" />
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+    android:background="@color/black_viewpager"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="200dp"
+        app:srcCompat="@drawable/ic_comp"
+        android:layout_height="200dp"
+        android:visibility="invisible"
+        android:id="@+id/tick_image"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp" />
+
+    <TextView
+        android:text="Test Submitted "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tick_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="72dp"
+        android:visibility="invisible"
+        android:id="@+id/test_submit_text"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

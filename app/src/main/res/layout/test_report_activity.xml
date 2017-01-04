@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+          <include layout="@layout/toolbar_new"/>
+
+    </android.support.design.widget.AppBarLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:background="@color/black_viewpager"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+                android:id="@+id/test_report_content_root"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+
+                android:id="@+id/frame_root_treports"
+                android:layout_height="match_parent">
+
+                <include layout="@layout/loading_list_white"/>
+
+            </FrameLayout>
+
+
+        </RelativeLayout>
+        <FrameLayout
+            android:layout_width="100dp"
+            android:id="@+id/test_report_drawer_frame"
+
+            android:visibility="invisible"
+            android:layout_height="match_parent">
+
+            <include layout="@layout/drawer_new"
+                />
+        </FrameLayout>
+    </FrameLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

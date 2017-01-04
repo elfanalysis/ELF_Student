@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:layout_width="match_parent"
+        android:id="@+id/test_overall_img"
+
+        android:layout_height="match_parent" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_900"
+        android:alpha="0.4"/>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:id="@+id/change_test_overall_root"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+</FrameLayout>
