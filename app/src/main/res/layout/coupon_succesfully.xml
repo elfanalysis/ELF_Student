@@ -23,78 +23,48 @@
             android:layout_marginTop="10dp"
             android:id="@+id/imageView" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/tx_martop"
-            android:id="@+id/textView28"
-            android:text="Hi"
-            android:textColor="@color/pink900"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:layout_below="@+id/imageView"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="match_parent"
+        <com.elf.elfstudent.CustomUI.HelviticaLight
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Usrename"
-            android:textSize="25sp"
-            android:typeface="serif"
+            android:textSize="32sp"
+
+            android:layout_marginBottom="20dp"
             android:id="@+id/coupon_succes_username"
             android:layout_below="@+id/textView28"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="17dp"
             android:gravity="center"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="19dp"
+            android:id="@+id/textView28"
+            android:text="Hi"
+            android:textColor="@color/pink900"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true" />
+
 
     </RelativeLayout>
 
-    <TextView
+    <com.elf.elfstudent.CustomUI.UbuntuRegular
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/relativeLayout"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="@dimen/coupon_sucess_applied"
-        android:typeface="serif"
+
         android:id="@+id/textView31"
         android:textColor="#808080"
         android:text="Applied succesfully"
         android:gravity="center"
         android:textSize="22sp"/>
 
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/coupon_sucess_bt_blw"
-        android:id="@+id/coupon_sucess_button3"
-        android:background="@drawable/pink_login_rounded"
-        android:text="close"
-        android:textColor="@color/white_light"
-        android:typeface="serif"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="30dp"
-        android:layout_below="@+id/textView32"
-        android:layout_marginRight="30dp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Question have been added enjoy"
-        android:textSize="22sp"
-        android:gravity="center"
-        android:textColor="#808080"
-        android:layout_marginTop="@dimen/coupon_sucess_edittop"
-        android:id="@+id/textView32"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/textView30"
-        android:layout_marginBottom="81dp" />
 
     <TextView
         android:layout_width="match_parent"
@@ -106,6 +76,35 @@
         android:id="@+id/textView30"
         android:layout_below="@+id/textView31"
         android:layout_marginTop="@dimen/copon_sucess_98"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test have been added in Each Subject"
+        android:textSize="22sp"
+        android:gravity="center"
+        android:textColor="#808080"
+        android:layout_marginTop="40dp"
+        android:id="@+id/textView32"
+        android:layout_below="@+id/textView30"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+
+        android:id="@+id/coupon_sucess_button3"
+        android:background="@drawable/pink_login_rounded"
+        android:text="close"
+        android:textColor="@color/white_light"
+
+
+        android:layout_alignTop="@+id/textView32"
+        android:layout_marginTop="62dp"
+        android:layout_alignLeft="@+id/relativeLayout"
+        android:layout_alignStart="@+id/relativeLayout"
+        android:layout_alignRight="@+id/relativeLayout"
+        android:layout_alignEnd="@+id/relativeLayout" />
 
 
 </RelativeLayout>

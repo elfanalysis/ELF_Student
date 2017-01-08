@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity implements
 
         if (getIntent() !=  null){
             email  = getIntent().getStringExtra(BundleKey.ARG_EMAIL_ID_TAG);
-            Log.d(TAG, "onCreate: intent");
+
         }
 
 
@@ -106,6 +106,7 @@ public class LoginActivity extends AppCompatActivity implements
         mRequestQueue = AppRequestQueue.getInstance(this.getApplicationContext());
 
         mStore = DataStore.getStorageInstance(getApplicationContext());
+
 
 
         mLoginButton.setOnClickListener(new View.OnClickListener() {
@@ -125,6 +126,7 @@ public class LoginActivity extends AppCompatActivity implements
 
     }
 
+
     private void forgotPAssword() {
         final Intent i   = new Intent(this,ForgotPassword.class);
         startActivity(i);
@@ -132,7 +134,7 @@ public class LoginActivity extends AppCompatActivity implements
 
     private void loginButtonClicked() {
 
-        mDialog.show();
+        ShowDialog();
         userName = memailBox.getText().toString();
 
         String password = mPasswordBox.getText().toString();
@@ -149,8 +151,15 @@ public class LoginActivity extends AppCompatActivity implements
             Log.d(TAG, "loginButtonClicked: ");
         }
 
+
         JsonArrayRequest mRequest = new JsonArrayRequest(Request.Method.POST, LOGIN_URL, mObject, this, this);
         mRequestQueue.addToRequestQue(mRequest);
+    }
+
+    private void ShowDialog() {
+        if (mDialog != null && !mDialog.isShowing()){
+            mDialog.show();
+        }
     }
 
     @Override
@@ -163,7 +172,7 @@ public class LoginActivity extends AppCompatActivity implements
 
 
     private void stopDialog(){
-        if (mDialog.isShowing()){
+        if (mDialog != null && mDialog.isShowing()){
             mDialog.dismiss();
         }
     }
@@ -227,6 +236,9 @@ public class LoginActivity extends AppCompatActivity implements
                         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(i);
+                    }
+                    else{
+                        Toast.makeText(this,"Please try again",Toast.LENGTH_LONG).show();
                     }
                 }
                 else {

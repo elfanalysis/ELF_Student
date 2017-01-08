@@ -1,9 +1,13 @@
 package com.elf.elfstudent.Activities;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 
@@ -25,6 +29,10 @@ public class AboutUsActivity extends AppCompatActivity {
 
     @BindView(R.id.moc_text)
     UbuntuRegular moc_text;
+
+
+@BindView(R.id.about_toolbar)
+    Toolbar mtoolbar;
     @BindView(R.id.top_card)
     CardView topCard;
     @BindView(R.id.love_text)
@@ -39,6 +47,11 @@ public class AboutUsActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         performIntroAnimations();
         loveText.setTypeface(FontCache.getTypeface("fonts/grand_hotel.otf",getApplicationContext()));
+
+        setSupportActionBar(mtoolbar);
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+        ab.setDisplayShowHomeEnabled(true);
 
 
 //        ButterKnife.bind(this);
@@ -79,6 +92,22 @@ public class AboutUsActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case android.R.id.home:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    finishAfterTransition();
+                }
+                else{
+                    finish();
+                }
+        }
+
+        return true;
     }
 
     @Override

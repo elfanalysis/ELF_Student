@@ -83,6 +83,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
+
         android:hint="Type your email"
         android:textColorHighlight="@color/pink900"
         android:ems="10"

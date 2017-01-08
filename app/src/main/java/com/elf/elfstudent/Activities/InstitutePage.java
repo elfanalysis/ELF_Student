@@ -33,6 +33,7 @@ import com.elf.elfstudent.R;
 import com.elf.elfstudent.Utils.BundleKey;
 import com.elf.elfstudent.Utils.RequestParameterKey;
 import com.elf.elfstudent.Utils.ScreenUtil;
+import com.elf.elfstudent.Utils.Server_Values;
 import com.elf.elfstudent.model.InstitutionModel;
 import com.elf.elfstudent.model.StandardModel;
 import com.squareup.picasso.Callback;
@@ -142,8 +143,10 @@ public class InstitutePage extends AppCompatActivity implements
 
         //Populate Class List
         classList = new ArrayList<>(2);
-        classList.add(new StandardModel("10th Standard","1"));
-        classList.add(new StandardModel("12th Standard","2"));
+
+
+        classList.add(new StandardModel("10th Standard", Server_Values.TENTH_CLASS_ID));
+        classList.add(new StandardModel("12th Standard",Server_Values.TWELTH_CLASS_ID));
 
         //prepare Adapter for Class SPinner
         mClassAdapter = new ClassSpinnerAdapter(getApplicationContext(),R.layout.simple_spinner,classList);
@@ -207,7 +210,7 @@ public class InstitutePage extends AppCompatActivity implements
         }
         else{
             //Class id has been selected
-            if (classid.equals("1")){
+            if (classid.equals(Server_Values.TENTH_CLASS_ID)){
                 groupId = "0";
                 RegisterStudent(groupId);
             }
@@ -223,7 +226,7 @@ public class InstitutePage extends AppCompatActivity implements
                 mCsButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        // TODO: 15/11/16 find computer id
+
                         groupId = "1";
                         RegisterStudent(groupId);
                     }
@@ -277,12 +280,12 @@ public class InstitutePage extends AppCompatActivity implements
                 mObject.put(RequestParameterKey.PHONE,mStore.getPhoneNumber());
                 mObject.put(RequestParameterKey.INSTITUION_ID,ins_id);
                 mObject.put(RequestParameterKey.board_id,"1");
-                if (classid.equals("10")){
+                if (classid.equals(Server_Values.TENTH_CLASS_ID)){
 
-                    mObject.put(RequestParameterKey.CLASS_ID,"1");
+                    mObject.put(RequestParameterKey.CLASS_ID,Server_Values.TENTH_CLASS_ID);
                 }
                 else{
-                    mObject.put(RequestParameterKey.CLASS_ID,"2");
+                    mObject.put(RequestParameterKey.CLASS_ID,Server_Values.TWELTH_CLASS_ID);
                 }
                 mObject.put(RequestParameterKey.CITY_ID,"1");
                 mObject.put(RequestParameterKey.DISTRICT_ID,"1");

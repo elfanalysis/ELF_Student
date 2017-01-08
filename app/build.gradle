@@ -9,7 +9,7 @@ android {
         config {
             keyAlias 'StudentKey'
             keyPassword 'elfisredblood'
-            storeFile file('C:/Users/system3/AndroidStudioProjects/ELF_Student_production/app/studentkey.jks')
+            storeFile file('D:/ELF/Student/Elf_stud_prod_to nandhu/app/studentkey.jks')
             storePassword 'elfisredblood'
         }
     }
@@ -19,8 +19,8 @@ android {
         applicationId "com.elf.elfstudent"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 5
-        versionName "1.0"
+        versionCode 6
+        versionName "1.6"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         signingConfig signingConfigs.config
@@ -84,6 +84,7 @@ dependencies {
     compile 'com.google.firebase:firebase-crash:9.8.0'
     compile 'com.google.firebase:firebase-core:9.8.0'
     compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.github.deano2390:MaterialShowcaseView:1.1.0'
     compile project(':volley')
 }
 

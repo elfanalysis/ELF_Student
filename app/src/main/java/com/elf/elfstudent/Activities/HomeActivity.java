@@ -4,10 +4,8 @@ import android.animation.Animator;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.util.Pair;
@@ -25,8 +23,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -39,6 +37,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.elf.elfstudent.Adapters.SubjectHomeAdapter;
 import com.elf.elfstudent.CustomUI.HelviticaLight;
 import com.elf.elfstudent.CustomUI.UbuntuRegular;
+import com.elf.elfstudent.CustomUI.titleTextview;
 import com.elf.elfstudent.DataStorage.DataStore;
 import com.elf.elfstudent.Network.AppRequestQueue;
 import com.elf.elfstudent.Network.ErrorHandler;
@@ -47,6 +46,7 @@ import com.elf.elfstudent.R;
 import com.elf.elfstudent.SplashActivity;
 import com.elf.elfstudent.Utils.BundleKey;
 import com.elf.elfstudent.Utils.ScreenUtil;
+import com.elf.elfstudent.Utils.Server_Values;
 import com.elf.elfstudent.Utils.WebServices;
 import com.elf.elfstudent.model.SubjectModel;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -60,26 +60,28 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 import static android.support.v4.app.ActivityOptionsCompat.makeSceneTransitionAnimation;
 
 /**
  * Created by nandhu on 17/10/16.
  * The Home Acitivity
- *
  */
-public class HomeActivity extends AppCompatActivity  implements ErrorHandler.ErrorHandlerCallbacks,
-        HomePageDataProvider.HomeDataProvider,SubjectHomeAdapter.onCardClick{
+public class HomeActivity extends AppCompatActivity implements ErrorHandler.ErrorHandlerCallbacks,
+        HomePageDataProvider.HomeDataProvider, SubjectHomeAdapter.onCardClick {
 
 
     private static final String TAG = "ELF";
+    private static final String SHOWCASE_ID = "10010";
 
 
     @BindView(R.id.home_state_image)
     CircleImageView mStateImage;
-    @BindView(R.id.home_overall_image) CircleImageView overall;
-    @BindView(R.id.home_district_image) CircleImageView mdist;
-
+    @BindView(R.id.home_overall_image)
+    CircleImageView overall;
+    @BindView(R.id.home_district_image)
+    CircleImageView mdist;
 
 
     DataStore mStore;
@@ -93,10 +95,12 @@ public class HomeActivity extends AppCompatActivity  implements ErrorHandler.Err
     UbuntuRegular mStudentName;
 
     //School Name
-    @BindView(R.id.home_school_name) UbuntuRegular mSchoolname;
+    @BindView(R.id.home_school_name)
+    UbuntuRegular mSchoolname;
 
     //standard Name
-    @BindView(R.id.home_section_name) UbuntuRegular mStandardName;
+    @BindView(R.id.home_section_name)
+    UbuntuRegular mStandardName;
 
     //Profile picture
     @BindView(R.id.home_profile_imageview)
@@ -109,25 +113,30 @@ public class HomeActivity extends AppCompatActivity  implements ErrorHandler.Err
 
     //Overall rank
 
-    @BindView(R.id.home_overall_rank_value) UbuntuRegular mOverallValue;
+    @BindView(R.id.home_overall_rank_value)
+    UbuntuRegular mOverallValue;
 
     //District
 
-    @BindView(R.id.home_dist_rank_value) UbuntuRegular mDistrictRankValue;
-
+    @BindView(R.id.home_dist_rank_value)
+    UbuntuRegular mDistrictRankValue;
 
 
     //The Subject List
 
 
-    RecyclerView mList=null;
+    RecyclerView mList = null;
+    @BindView(R.id.overall_root)
+    RelativeLayout overallRoot;
+    @BindView(R.id.district_root)
+    RelativeLayout districtRoot;
+    @BindView(R.id.state_root)
+    RelativeLayout stateRoot;
     private SubjectHomeAdapter.onCardClick mCallback = null;
 
 
 //    @BindView(R.id.try_again_text)
 //    TextView mTryagain;
-
-
 
 
     //The Adapter for The list
@@ -138,36 +147,42 @@ public class HomeActivity extends AppCompatActivity  implements ErrorHandler.Err
     @BindView(R.id.elf_toolbar)
     Toolbar mToolbar;
 
+
+    @BindView(R.id.title_text_toolbar)
+    titleTextview titleText;
     //The App bar layout
 
 
-
-
     //The Drop Down Icon
-    @BindView(R.id.tool_bar_drop) ImageView mDropIcon;
-    @BindView(R.id.home_drawer_frame) FrameLayout mdrawerLayout;
-    @BindView(R.id.home_menu) CardView mHomeButton;
-    @BindView(R.id.test_menu) CardView mTestButton;
-    @BindView(R.id.report_menu ) CardView mReportButton;
-    @BindView(R.id.test_report_menu) CardView mTestReportButton;
-    @BindView(R.id.payments_menu) CardView mPaymentsButton;
+    @BindView(R.id.tool_bar_drop)
+    ImageView mDropIcon;
+    @BindView(R.id.home_drawer_frame)
+    FrameLayout mdrawerLayout;
+    @BindView(R.id.home_menu)
+    CardView mHomeButton;
+    @BindView(R.id.test_menu)
+    CardView mTestButton;
+    @BindView(R.id.report_menu)
+    CardView mReportButton;
+    @BindView(R.id.test_report_menu)
+    CardView mTestReportButton;
+    @BindView(R.id.payments_menu)
+    CardView mPaymentsButton;
 
     //The Root Content Layyout
-    @BindView(R.id.changable_home_root) FrameLayout mRoot;
+    @BindView(R.id.changable_home_root)
+    FrameLayout mRoot;
     @BindView(R.id.home_root_scrollview)
     ScrollView mRootScroll;
-
-
-
 
 
     FirebaseAnalytics mAnalytics = null;
 
     //The Request Queue
-    private AppRequestQueue mRequestQueue= null;
+    private AppRequestQueue mRequestQueue = null;
     private List<SubjectModel> mSubjectList = null;
 
-    ErrorHandler errorHandler ;
+    ErrorHandler errorHandler;
     HomePageDataProvider mDataProvider = null;
 
 
@@ -177,30 +192,39 @@ public class HomeActivity extends AppCompatActivity  implements ErrorHandler.Err
     //The Drawer
 
 
-
-
-
     boolean isDrawerShowing = false;
     String studnetId = null;
     private int count = 0;
     private boolean adapterSet = false;
 
-    
-    
-    public void pop(String s ){
-        Log.d(TAG, " "+s);
+    private boolean isAnimationsrun = false;
+    public static final String ANIMATION_RUN = "anim_run";
+
+
+    public void pop(String s) {
+        Log.d(TAG, " " + s);
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
+
         ButterKnife.bind(this);
-        
+        if (savedInstanceState != null) {
+            isAnimationsrun = savedInstanceState.getBoolean(ANIMATION_RUN, false);
+        }
+        if (!isAnimationsrun) {
 
-
-
-
+            startAnimations();
+        }
+        new MaterialShowcaseView.Builder(this)
+                .setTarget(mDropIcon)
+                .setDismissText("GOT IT")
+                .setContentText("Click on this ICON to see Menus")
+                  // optional but starting animations immediately in onCreate can make them choppy
+                .singleUse(SHOWCASE_ID) // provide a unique ID used to ensure it is only shown once
+                .show();
 
 
         //setting trophy images
@@ -211,7 +235,7 @@ public class HomeActivity extends AppCompatActivity  implements ErrorHandler.Err
         mdist.setImageResource(R.drawable.district);
 
         //get The details for this User from Shared PRefs
-        mStore  = DataStore.getStorageInstance(this.getApplicationContext());
+        mStore = DataStore.getStorageInstance(this.getApplicationContext());
         setViewValues();
 
 
@@ -219,20 +243,16 @@ public class HomeActivity extends AppCompatActivity  implements ErrorHandler.Err
         mRequestQueue = AppRequestQueue.getInstance(getApplicationContext());
 
 
-
-
-
         //Toolbar setup
         setSupportActionBar(mToolbar);
 
-        ActionBar ab  = getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         try {
             ab.setDisplayShowHomeEnabled(true); // show or hide the default home button
             ab.setDisplayShowCustomEnabled(true); // enable overriding the default toolbar layout
             ab.setDisplayShowTitleEnabled(false);
-        }
-        catch (Exception e ){
-        		FirebaseCrash.log("Exception Occured in settingActionbar");
+        } catch (Exception e) {
+            FirebaseCrash.log("Exception Occured in settingActionbar");
         }
 
 
@@ -243,37 +263,101 @@ public class HomeActivity extends AppCompatActivity  implements ErrorHandler.Err
         //navigation ICon
 
 
-        	if (mDropIcon != null) {
-        		
-        mDropIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DropButtonClicked();
-            }
-          });
+        if (mDropIcon != null) {
+
+            mDropIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    DropButtonClicked();
+                }
+            });
         }
 
-        if (mStore != null){
+        if (mStore != null) {
             studnetId = mStore.getStudentId();
-        }
-        else{
+        } else {
             throw new NullPointerException("Student Id Cannot Be null");
         }
         //sending DahsoArd Request
-        if (studnetId != null){
+        if (studnetId != null) {
 
             prepareDashBoardFor(studnetId);
+        } else {
+
+            //Student id null
         }
-        else{
-
-        	//Student id null
-        	}
-         setUpCustomDrawer();
+        setUpCustomDrawer();
 
 
+    }
+
+    private void startAnimations() {
+        titleText.setText("Home");
+        titleText.setTranslationY(-ScreenUtil.getScreenHeight(this));
+        titleText.animate().translationY(0).setDuration(400).setInterpolator(new DecelerateInterpolator(1.2f))
+                .setListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        performheaderAnimations();
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                })
+                .start();
 
 
+    }
 
+    private void performheaderAnimations() {
+        mProfilePicture.setTranslationX(-ScreenUtil.getScreenWidth(this));
+        mStudentName.setTranslationX(ScreenUtil.getScreenWidth(this));
+        mStandardName.setTranslationX(ScreenUtil.getScreenWidth(this));
+        mSchoolname.setTranslationX(ScreenUtil.getScreenWidth(this));
+        overallRoot.setTranslationX(-ScreenUtil.getScreenWidth(this));
+        districtRoot.setTranslationY(-0.9f);
+        stateRoot.setTranslationX(ScreenUtil.getScreenWidth(this));
+
+
+        //Animating Profile Picture
+        mProfilePicture.animate().translationX(0).setStartDelay(300)
+                .setDuration(1000)
+                .setInterpolator(new AccelerateDecelerateInterpolator()).start();
+        mStudentName.animate().translationX(0).setStartDelay(300)
+                .setDuration(800)
+                .setInterpolator(new AccelerateDecelerateInterpolator()).start();
+        mStandardName.animate().translationX(0).setStartDelay(500)
+                .setDuration(800)
+                .setInterpolator(new AccelerateDecelerateInterpolator()).start();
+        mSchoolname.animate().translationX(0).setStartDelay(700)
+                .setDuration(800)
+                .setInterpolator(new AccelerateDecelerateInterpolator()).start();
+
+        overallRoot.animate().translationX(0).setDuration(600)
+                .setStartDelay(400)
+                .setInterpolator(new AccelerateInterpolator())
+                .start();
+        districtRoot.animate().translationY(0).setDuration(600).setInterpolator(new AccelerateInterpolator())
+                .setStartDelay(400)
+                .start();
+        stateRoot.animate().translationX(0).setDuration(600).setInterpolator(new AccelerateInterpolator())
+                .setStartDelay(400)
+
+                .start();
+
+        isAnimationsrun = true;
     }
 
     private void setUpCustomDrawer() {
@@ -282,7 +366,7 @@ public class HomeActivity extends AppCompatActivity  implements ErrorHandler.Err
         mHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final  Intent i = new Intent(getApplicationContext(),HomeActivity.class);
+                final Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(i);
             }
         });
@@ -290,7 +374,7 @@ public class HomeActivity extends AppCompatActivity  implements ErrorHandler.Err
         mReportButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final  Intent i = new Intent(getApplicationContext(),ReportActivity.class);
+                final Intent i = new Intent(getApplicationContext(), ReportActivity.class);
                 startActivity(i);
             }
         });
@@ -299,7 +383,7 @@ public class HomeActivity extends AppCompatActivity  implements ErrorHandler.Err
         mTestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final  Intent i = new Intent(getApplicationContext(),BrowseTestActivity.class);
+                final Intent i = new Intent(getApplicationContext(), BrowseTestActivity.class);
                 startActivity(i);
             }
         });
@@ -309,7 +393,7 @@ public class HomeActivity extends AppCompatActivity  implements ErrorHandler.Err
         mTestReportButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Intent i = new Intent(getApplicationContext(),TestReportsActivity.class);
+                final Intent i = new Intent(getApplicationContext(), TestReportsActivity.class);
                 startActivity(i);
             }
         });
@@ -318,7 +402,7 @@ public class HomeActivity extends AppCompatActivity  implements ErrorHandler.Err
         mPaymentsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Intent i  = new Intent(getApplicationContext(),CouponActivity.class);
+                final Intent i = new Intent(getApplicationContext(), CouponActivity.class);
                 startActivity(i);
             }
         });
@@ -328,70 +412,65 @@ public class HomeActivity extends AppCompatActivity  implements ErrorHandler.Err
 //
 
 
-        if (!isDrawerShowing){
+        if (!isDrawerShowing) {
             mdrawerLayout.setTranslationX(-ScreenUtil.getScreenWidth(this));
             mdrawerLayout.animate()
-            .translationX(0)
-            .setInterpolator(new DecelerateInterpolator(1.5f))
-            .setDuration(600)
-            .setListener(new Animator.AnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animator) {
-                        mdrawerLayout.setVisibility(View.VISIBLE);
-                    }
+                    .translationX(0)
+                    .setInterpolator(new DecelerateInterpolator(1.5f))
+                    .setDuration(600)
+                    .setListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animator) {
+                            mdrawerLayout.setVisibility(View.VISIBLE);
+                        }
 
-                    @Override
-                    public void onAnimationEnd(Animator animator) {
+                        @Override
+                        public void onAnimationEnd(Animator animator) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onAnimationCancel(Animator animator) {
+                        @Override
+                        public void onAnimationCancel(Animator animator) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onAnimationRepeat(Animator animator) {
+                        @Override
+                        public void onAnimationRepeat(Animator animator) {
 
-                    }
-                }).start();
-            }
+                        }
+                    }).start();
+        } else {
 
-        else{
+            mdrawerLayout.animate()
+                    .setDuration(500)
+                    .setInterpolator(new AccelerateDecelerateInterpolator())
+                    .setListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animator) {
 
-                mdrawerLayout.animate()
-                .setDuration(500)
-                .setInterpolator(new AccelerateDecelerateInterpolator())
-                .setListener(new Animator.AnimatorListener() {
-                            @Override
-                            public void onAnimationStart(Animator animator) {
+                        }
 
-                            }
+                        @Override
+                        public void onAnimationEnd(Animator animator) {
 
-                            @Override
-                            public void onAnimationEnd(Animator animator) {
-                                    
-                            }
+                        }
 
-                            @Override
-                            public void onAnimationCancel(Animator animator) {
+                        @Override
+                        public void onAnimationCancel(Animator animator) {
 
-                            }
+                        }
 
-                            @Override
-                            public void onAnimationRepeat(Animator animator) {
+                        @Override
+                        public void onAnimationRepeat(Animator animator) {
 
-                            }
-                        }).translationX(-ScreenUtil.getScreenWidth(getApplicationContext())).start();
+                        }
+                    }).translationX(-ScreenUtil.getScreenWidth(getApplicationContext())).start();
 
         }
 
 
-
-        	//Invalidate Boolean
+        //Invalidate Boolean
         isDrawerShowing = !isDrawerShowing;
-
-
 
 
     }
@@ -402,36 +481,33 @@ public class HomeActivity extends AppCompatActivity  implements ErrorHandler.Err
 
         Log.d(TAG, "setViewValues: ");
 
-        if(mStore != null){
-
+        if (mStore != null) {
 
 
             mSchoolname.setText(mStore.getInstituionName());
 
 
-            if(mStore.getStandard().equals("1")){
+            if (mStore.getStandard().equals(Server_Values.TENTH_CLASS_ID)) {
 
-                mStandardName.setText(String.format("10 Grade", mStore.getStandard()));
-            }
-            else{
+                mStandardName.setText("10th Grade");
+            } else {
                 mStandardName.setText("12th Grade");
             }
             mStudentName.setText(mStore.getUserName());
-            studnetId  = mStore.getStudentId();
+            studnetId = mStore.getStudentId();
             String picturpath = mStore.getpicturePath();
-            Log.d(TAG, "setViewValues: picture path "+picturpath);
-            if (picturpath.equals("null")){
+            Log.d(TAG, "setViewValues: picture path " + picturpath);
+            if (picturpath.equals("null")) {
 
                 Log.d(TAG, "setViewValues: null");
-              //mProfilePicture.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.ic_account_circle_white_36dp));
-               mProfilePicture.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.ic_account_circle_white_36dp));
-               ;
-            }
-            else{
+                mProfilePicture.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.ic_account_circle_white_48dp));
+//                mProfilePicture.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_account_circle_black_48dp));
+//                Picasso.with(this).load(R.drawable.ic_user_blue).into(mProfilePicture);
+            } else {
                 //Some Picture  path is available
                 Uri pic = Uri.parse(mStore.getpicturePath());
                 Picasso.with(this).load(pic)
-                        .resize(100,100)
+                        .resize(100, 100)
                         .centerCrop()
                         .into(mProfilePicture);
 
@@ -443,14 +519,13 @@ public class HomeActivity extends AppCompatActivity  implements ErrorHandler.Err
         JSONObject mReqObjects = new JSONObject();
         try {
             mReqObjects.put("studentId", studentId);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             FirebaseCrash.log("Error in putting JSON value , Home");
         }
 
 
-       mHomeRequest = new JsonArrayRequest(Request.Method.POST, WebServices.DASH_URL, mReqObjects, mDataProvider, errorHandler);
-        if (mRequestQueue !=null){
+        mHomeRequest = new JsonArrayRequest(Request.Method.POST, WebServices.DASH_URL, mReqObjects, mDataProvider, errorHandler);
+        if (mRequestQueue != null) {
 
             mRequestQueue.addToRequestQue(mHomeRequest);
         }
@@ -466,124 +541,128 @@ public class HomeActivity extends AppCompatActivity  implements ErrorHandler.Err
     * */
 
 
-        @Override
-        protected void onDestroy (){
-            super.onDestroy();
-            mStore = null;
-            mDataProvider = null;
-            errorHandler = null;
-            mCallback = null;
-        }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mStore = null;
+        mDataProvider = null;
+        errorHandler = null;
+        mCallback = null;
+    }
 
-        @Override
-        protected void onSaveInstanceState (Bundle outState){
-            super.onSaveInstanceState(outState);
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(ANIMATION_RUN, isAnimationsrun);
 
-        }
+    }
 
-        @Override
-        protected void onStart () {
-            super.onStart();
-            mAnalytics = FirebaseAnalytics.getInstance(this);
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAnalytics = FirebaseAnalytics.getInstance(this);
 
-        }
-
-
+    }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.home_activity_menu,menu);
+        getMenuInflater().inflate(R.menu.home_activity_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-       switch (item.getItemId()){
-           case R.id.profile_menu:
-               final  Intent i = new Intent(this,ChangeProfileActivity.class);
-               startActivity(i);
+        switch (item.getItemId()) {
+            case R.id.profile_menu:
+                final Intent i = new Intent(this, ChangeProfileActivity.class);
+                startActivity(i);
 
 
-               break;
-           case R.id.about_menu :
-               final  Intent ii  = new Intent(this,AboutUsActivity.class);
-               startActivity(ii);
-               break;
+                break;
+            case R.id.about_menu:
+                final Intent ii = new Intent(this, AboutUsActivity.class);
+                startActivity(ii);
+                break;
 
-           case R.id.feedback_menu:
-               final  Intent iiii = new Intent(this,FeedbackActivity.class);
-               startActivity(iiii);
-               break;
+            case R.id.feedback_menu:
+                final Intent iiii = new Intent(this, FeedbackActivity.class);
+                startActivity(iiii);
+                break;
 
-           case R.id.contact_us:
-               final  Intent iiiii = new Intent(this,Contact_us.class);
-               startActivity(iiiii);
-               break;
-           case  R.id.log_out :
-               LogoutUser();
-               break;
+            case R.id.contact_us:
+                final Intent iiiii = new Intent(this, Contact_us.class);
+                startActivity(iiiii);
+                break;
+            case R.id.log_out:
+                LogoutUser();
+                break;
 
 
-
-       }
+        }
         return true;
     }
 
     private void LogoutUser() {
-        if(mStore == null){
+        if (mStore == null) {
             mStore = DataStore.getStorageInstance(this);
 
         }
         mStore.logout();
-        final  Intent  i = new Intent(this,SplashActivity.class);
+        final Intent i = new Intent(this, SplashActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(i);
+        finish();
+
     }
 
     @Override
-        protected void onStop () {
-            super.onStop();
-            errorHandler = null;
-            mDataProvider = null;
-            mSubjectAdapter = null;
+    protected void onStop() {
+        super.onStop();
+        errorHandler = null;
+        mDataProvider = null;
+        mSubjectAdapter = null;
         Log.d(TAG, "onStop: ");
-        }
+    }
 
-        @Override
-        public void onBackPressed () {
-            
-            
-        }
+    @Override
+    public void onBackPressed() {
 
-        @Override
-        protected void onPause () {
-            super.onPause();
+
+        finish();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
 
 //          unbindDrawables(mProfilePicture);
 
 
-        }
+    }
 
 
     //Unbinds Drawable , call this method in onPause , with a  to call System.gc();
 
     /**
      * see the post  <a href = "http://stackoverflow.com/questions/14620848/getting-out-of-memory-error-while-starting-a-activity-in-android-app"></a>
-     *
-     *  for futher clairificaitons
+     * <p>
+     * for futher clairificaitons
      * Currently not used anywhere
-     * */
-
-
+     */
 
 
     private void unbindDrawables(View view) {
-        try{
-            System.out.println("UNBINDING"+view);
+        try {
+
             if (view.getBackground() != null) {
 
-                ((BitmapDrawable)view.getBackground()).getBitmap().recycle();
+                ((BitmapDrawable) view.getBackground()).getBitmap().recycle();
                 view.getBackground().setCallback(null);
-                view=null;
+                view = null;
             }
 
             if (view instanceof ViewGroup) {
@@ -593,128 +672,122 @@ public class HomeActivity extends AppCompatActivity  implements ErrorHandler.Err
                 ((ViewGroup) view).removeAllViews();
             }
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
         }
     }
 
 
-        @Override
-        protected void onResume () {
-            super.onResume();
-        }
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 
-        @Override
-        protected void onRestoreInstanceState (Bundle savedInstanceState){
-            super.onRestoreInstanceState(savedInstanceState);
-        }
-
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+    }
 
 
 // Called from Adapter , this is called on CLicking  a subject , in Recyceler view
-        //   
+    //
 
-        @Override
-        public void InfoButtonClicked(int position, View itemView){
-
-
-
-            try{
-                if(isDrawerShowing){
-
-                    DropButtonClicked();
-                }
-               
-                HelviticaLight percentText = (HelviticaLight) itemView.findViewById(R.id.percent);
-                String percentTransName = ViewCompat.getTransitionName(percentText);
+    @Override
+    public void InfoButtonClicked(int position, View itemView) {
 
 
-                ImageView subjectImage = (ImageView)itemView.findViewById(R.id.home_card_sub_imageview);
-                String img_trans_name = ViewCompat.getTransitionName(subjectImage);
+        try {
+            if (isDrawerShowing) {
 
-                //Intent for Next Activity
-                Intent i = new Intent(this,SubjectViewActivity.class);
-                i.putExtra(BundleKey.PERCENTAGE,percentText.getText());
-                i.putExtra(BundleKey.SUBJECT_ID,mSubjectList.get(position).getmSubjectId());
-                //Putting Transition Name Values
+                DropButtonClicked();
+            }
+
+            HelviticaLight percentText = (HelviticaLight) itemView.findViewById(R.id.percent);
+            String percentTransName = ViewCompat.getTransitionName(percentText);
+
+
+            ImageView subjectImage = (ImageView) itemView.findViewById(R.id.home_card_sub_imageview);
+            String img_trans_name = ViewCompat.getTransitionName(subjectImage);
+
+            //Intent for Next Activity
+            Intent i = new Intent(this, SubjectViewActivity.class);
+            i.putExtra(BundleKey.PERCENTAGE, percentText.getText());
+            i.putExtra(BundleKey.SUBJECT_ID, mSubjectList.get(position).getmSubjectId());
+            //Putting Transition Name Values
 //                i.putExtra(BundleKey.HOME_SUBJECT_TRANS_NAME,subTransName);           i.p
-                i.putExtra(BundleKey.ARG_STUDENT_ID,studnetId);
-                i.putExtra(BundleKey.HOME_PERCENT_TRANS_NAME,percentTransName);
+            i.putExtra(BundleKey.ARG_STUDENT_ID, studnetId);
+            i.putExtra(BundleKey.HOME_PERCENT_TRANS_NAME, percentTransName);
 
-                i.putExtra(BundleKey.HOME_SUBJECT_IMAGE_TRANS_NAME,img_trans_name);
+            i.putExtra(BundleKey.HOME_SUBJECT_IMAGE_TRANS_NAME, img_trans_name);
 
-                //send Subject iD to NExt Activity
-                i.putExtra(BundleKey.SUBJECT_ID,mSubjectList.get(position).getmSubjectId());
+            //send Subject iD to NExt Activity
+            i.putExtra(BundleKey.SUBJECT_ID, mSubjectList.get(position).getmSubjectId());
 
 //                Log.d(TAG, "Sending Transition Values "+subTransName +" "+percentTransName + " "+img_trans_name);
 
 
-
-                //MAking pairs for many Share elements
-                Pair<View, String> p1 = Pair.create((View)subjectImage, img_trans_name);
+            //MAking pairs for many Share elements
+            Pair<View, String> p1 = Pair.create((View) subjectImage, img_trans_name);
 //                Pair<View, String> p2 = Pair.create((View) subjectName, subTransName);
-                Pair<View, String> p3 = Pair.create((View)percentText, percentTransName);
+            Pair<View, String> p3 = Pair.create((View) percentText, percentTransName);
 
 
-                ActivityOptionsCompat options = makeSceneTransitionAnimation(this, p1,p3);
-                if (ScreenUtil.isAndroid5()){
+            ActivityOptionsCompat options = makeSceneTransitionAnimation(this, p1, p3);
+            if (ScreenUtil.isAndroid5()) {
 
-                    startActivity(i, options.toBundle());
-                }else{
-                    startActivity(i);
-                }
+                startActivity(i, options.toBundle());
+            } else {
+                startActivity(i);
             }
-            catch (Exception e ){
-                Log.d(TAG, "InfoButtonClicked: Exception "+e.getLocalizedMessage());
-            }
+        } catch (Exception e) {
+            Log.d(TAG, "InfoButtonClicked: Exception " + e.getLocalizedMessage());
         }
+    }
 
-        @Override
-        public void DetailsButtonClicked(int position, View itemView){
+    @Override
+    public void DetailsButtonClicked(int position, View itemView) {
 
 
-        }
+    }
 
     @Override
     public void TimeoutError() {
 
 
-        Bundle  b = new Bundle();
-        b.putString(BundleKey.TIMEOUT,BundleKey.TIMEOUT);
-        mAnalytics.logEvent(BundleKey.TIMEOUT,b);
+        Bundle b = new Bundle();
+        b.putString(BundleKey.TIMEOUT, BundleKey.TIMEOUT);
+        mAnalytics.logEvent(BundleKey.TIMEOUT, b);
 
 
-        if (!(count>2)){
+        if (!(count > 2)) {
 
 
             //Retrying
-            if (mHomeRequest != null){
+            if (mHomeRequest != null) {
                 mRequestQueue.addToRequestQue(mHomeRequest);
                 count++;
             }
-        }
-        else{
+        } else {
 
-        	try{
+            try {
 
-            mRoot.removeAllViews();
-            View v = View.inflate(this,R.layout.try_again_layout,mRoot);
-            ButterKnife.bind(v);
-            TextView t = (TextView) v.findViewById(R.id.try_again_text);
-            t.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if(mRequestQueue != null){
-                        mRequestQueue.addToRequestQue(mHomeRequest);
+                mRoot.removeAllViews();
+                View v = View.inflate(this, R.layout.try_again_layout, mRoot);
+                ButterKnife.bind(v);
+                TextView t = (TextView) v.findViewById(R.id.try_again_text);
+                t.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (mRequestQueue != null) {
+                            mRequestQueue.addToRequestQue(mHomeRequest);
+                        }
                     }
-                }
-            });
-        	}
-        	catch (Exception e) {
-        		FirebaseCrash.log("Exception in Setting Values");
-        		
-        	}
+                });
+            } catch (Exception e) {
+                FirebaseCrash.log("Exception in Setting Values");
+
+            }
         }
 
 
@@ -723,18 +796,13 @@ public class HomeActivity extends AppCompatActivity  implements ErrorHandler.Err
     @Override
     public void NetworkError() {
         Log.d(TAG, "NetworkError: ");
-        try{
+        try {
 
             mRoot.removeAllViews();
-            View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.no_internet,mRoot,true);
-        }
-        catch (Exception e){
+            View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.no_internet, mRoot, true);
+        } catch (Exception e) {
             FirebaseCrash.log("Excepiont in changing views");
         }
-
-
-
-
 
 
     }
@@ -743,22 +811,20 @@ public class HomeActivity extends AppCompatActivity  implements ErrorHandler.Err
     public void ServerError() {
         FirebaseCrash.log("Error in server");
 
-        try{
+        try {
 
             mRoot.removeAllViews();
-            View v = View.inflate(this,R.layout.send_feedback,mRoot);
-        }
-        catch (Exception e){
+            View v = View.inflate(this, R.layout.send_feedback, mRoot);
+        } catch (Exception e) {
             FirebaseCrash.log("Exception chnaging views");
         }
     }
 
 
-
-    /**   Inter face Methods called from {@link HomePageDataProvider }
-     *   This  Method provides the Process Response
-     *
-     * */
+    /**
+     * Inter face Methods called from {@link HomePageDataProvider }
+     * This  Method provides the Process Response
+     */
 
 
     @Override
@@ -779,25 +845,23 @@ public class HomeActivity extends AppCompatActivity  implements ErrorHandler.Err
 
         //Remove the Present View in Frame Layout ,
 
-        if (!adapterSet){
+        if (!adapterSet) {
             //if adapter is not set .. then
 
-            try{
+            try {
 
-            mRoot.removeAllViews();
-            View v  = LayoutInflater.from(this).inflate(R.layout.home_recyler_view,mRoot,true);
+                mRoot.removeAllViews();
+                View v = LayoutInflater.from(this).inflate(R.layout.home_recyler_view, mRoot, true);
 
-            mList = (RecyclerView) v.findViewById(R.id.home_list_rv);
-            adapterSet = true;
-            mList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-            mList.setAdapter(mSubjectAdapter);
-            mList.setHasFixedSize(true);
-            }
-            catch (Exception e ){
+                mList = (RecyclerView) v.findViewById(R.id.home_list_rv);
+                adapterSet = true;
+                mList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                mList.setAdapter(mSubjectAdapter);
+                mList.setHasFixedSize(true);
+            } catch (Exception e) {
                 FirebaseCrash.log("Exception in setting Home Adapter");
             }
-        }
-        else{
+        } else {
             // adapter already set
             //dont do anything
             Log.d(TAG, "adapter already  set");
@@ -805,21 +869,20 @@ public class HomeActivity extends AppCompatActivity  implements ErrorHandler.Err
     }
 
 
-
     /**
-     *This method Returns NEw Adapter from the data or calls notifydatasetChanged
+     * This method Returns NEw Adapter from the data or calls notifydatasetChanged
      * {@param List<SubjectModel> subjectList}
      * {@return SubjectHomeAdapter mAdapter }
-    * */
+     */
 
     private SubjectHomeAdapter getNewOrModifiedAdapter(List<SubjectModel> mSubjectList) {
         mCallback = this;
-        if (mSubjectAdapter == null){
+        if (mSubjectAdapter == null) {
 
-            mSubjectAdapter = new SubjectHomeAdapter(getApplicationContext(),mSubjectList,mCallback);
+            mSubjectAdapter = new SubjectHomeAdapter(getApplicationContext(), mSubjectList, mCallback);
 
             return mSubjectAdapter;
-        }else{
+        } else {
             //Adapter Already Exists
             mSubjectAdapter.setNewSubjectList(mSubjectList);
             return mSubjectAdapter;
@@ -827,19 +890,17 @@ public class HomeActivity extends AppCompatActivity  implements ErrorHandler.Err
     }
 
 
-
     @Override
     public void NoDataReceivedFromWebservice() {
         FirebaseCrash.log("getting Response but showing no data in Home student dashboard API");
 
 
-        if (mRoot != null){
+        if (mRoot != null) {
             try {
 
-                View v = View.inflate(this,R.layout.no_data,mRoot);
-            }
-            catch (Exception e ){
-                Toast.makeText(this,"No data Received , please try again later",Toast.LENGTH_SHORT).show();
+                View v = View.inflate(this, R.layout.no_data, mRoot);
+            } catch (Exception e) {
+                Toast.makeText(this, "No data Received , please try again later", Toast.LENGTH_SHORT).show();
             }
         }
     }

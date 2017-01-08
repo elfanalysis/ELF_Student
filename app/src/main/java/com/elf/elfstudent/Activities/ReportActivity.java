@@ -25,12 +25,14 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.elf.elfstudent.Adapters.ViewPagerAdapters.BiologyReportPagerAdapter;
 import com.elf.elfstudent.Adapters.ViewPagerAdapters.ComputerReportPagerAdapter;
 import com.elf.elfstudent.Adapters.ViewPagerAdapters.TenthReportPagerAdapter;
+import com.elf.elfstudent.CustomUI.titleTextview;
 import com.elf.elfstudent.DataStorage.DataStore;
 import com.elf.elfstudent.Network.AppRequestQueue;
 import com.elf.elfstudent.Network.ErrorHandler;
 import com.elf.elfstudent.R;
 import com.elf.elfstudent.Utils.RequestParameterKey;
 import com.elf.elfstudent.Utils.ScreenUtil;
+import com.elf.elfstudent.Utils.Server_Values;
 
 
 import org.json.JSONArray;
@@ -76,7 +78,8 @@ public class ReportActivity extends AppCompatActivity{
     @BindView(R.id.report_pager)
     ViewPager mPager;
 
-
+    @BindView(R.id.title_text_toolbar)
+    titleTextview titleText;
     @BindView(R.id.report_toolbar)
     Toolbar mToolbar;
 
@@ -121,6 +124,8 @@ public class ReportActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.report_activity);
         ButterKnife.bind(this);
+
+        titleText.setText("Reports");
 
 
         mStore = DataStore.getStorageInstance(getApplicationContext());
@@ -274,7 +279,7 @@ public class ReportActivity extends AppCompatActivity{
             if (classId != null) {
 
 
-                if (classId.equals("1")) {
+                if (classId.equals(Server_Values.TENTH_CLASS_ID)) {
 
                     //user is 10
                     Log.d(TAG, "user is 10");
@@ -283,6 +288,7 @@ public class ReportActivity extends AppCompatActivity{
                 } else {
                     //he is 12 , get the group
                     String group = mStore.getStudentGroup();
+
                     if (group != null){
 
                         Log.d(TAG, "user 12 ,group : " + group);

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.elf.elfstudent.CustomUI.DroidMono;
 import com.elf.elfstudent.CustomUI.HelviticaLight;
 import com.elf.elfstudent.R;
 import com.elf.elfstudent.model.Answers;
@@ -40,7 +41,7 @@ public class QuestionPagerAdapter extends PagerAdapter {
     private static int currentPosition = 0;
 
     @BindView(R.id.test_question_text)
-    HelviticaLight mQuestionText;
+    DroidMono mQuestionText;
 
     @BindView(R.id.test_radio_group)
     RadioGroup mGroup;

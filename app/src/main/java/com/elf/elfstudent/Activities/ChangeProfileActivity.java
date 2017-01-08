@@ -99,11 +99,12 @@ public class ChangeProfileActivity extends AppCompatActivity {
 
 
         String picturpath = mStore.getpicturePath();
-        Log.d(TAG, "setViewValues: picture path "+picturpath);
+
         if (picturpath.equals("null")){
             //NO Picture path , set Dfault Image
-            Log.d(TAG, "setViewValues: default picture");
-            Picasso.with(this).load(R.drawable.ic_account_circle_white_36dp).into(mProfilePicture);
+            Log.d(TAG, "Null Profie Picture");
+
+            Picasso.with(this).load(R.drawable.ic_user_blue).into(mProfilePicture);
         }
         else{
             //Some pIcture path is available
@@ -187,7 +188,12 @@ public class ChangeProfileActivity extends AppCompatActivity {
             mElfId.setText(mStore.getStudentId());
             mNamebox.setText(mStore.getUserName());
             mSchoolName.setText(mStore.getInstituionName());
-            mStandard.setText(String.format("%s Standard", mStore.getStandard()));
+            if (mStore.getStandard().equals("1")){
+                mStandard.setText("10th Standard");
+            }
+            else{
+                mStandard.setText("12th Standard");
+            }
             mEmailBox.setText(mStore.getEmailId());
             mPhoneNumber.setText(mStore.getPhoneNumber());
         }

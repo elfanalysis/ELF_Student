@@ -211,7 +211,7 @@ public class DataStore {
 
         }
         else if (i.equals("2")){
-            //// TODO: 10/11/16 ad io
+
             editor.putString(SUBJECT_SELECTED,BIOLOGY);
             editor.apply();
         }

@@ -4,8 +4,10 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="4dp"
-    app:cardBackgroundColor="@color/white"
+
+    app:cardBackgroundColor="@color/material_grey200"
     android:layout_margin="2dp"
+    app:cardElevation="4dp"
     app:cardUseCompatPadding="true"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -13,6 +15,7 @@
     <RelativeLayout android:layout_width="match_parent"
         android:background="?selectableItemBackground"
         android:layout_height="match_parent"
+
         android:layout_marginBottom="8dp">
 
 
@@ -20,8 +23,7 @@
                 android:text="Lesson Name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:textColor="@color/material_grey800"
+                android:textColor="@color/black_900"
                  android:textSize="@dimen/lesson_item_text_size"
                android:paddingLeft="16dp"
                 android:gravity="start|left|center_vertical"
@@ -41,10 +43,8 @@
             android:text="55"
             android:layout_width="wrap_content"
             android:textSize="@dimen/lesson_item_text_size"
-            android:layout_marginRight="37dp"
+            android:layout_marginRight="12dp"
             android:layout_height="wrap_content"
-
-             android:padding="16dp"
 
             android:textColor="@color/black_900"
             android:gravity="start|left|center_vertical"
@@ -53,6 +53,9 @@
 
             android:id="@+id/report_frag_growth"
             android:layout_above="@+id/view"
+            android:layout_marginTop="16dp"
+            android:paddingTop="8dp"
+            android:padding="8dp"
             android:layout_alignParentTop="true" />
         <View
             android:layout_width="match_parent"
@@ -66,7 +69,9 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_below="@id/view"
-            android:background="#fee7e7"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:background="@drawable/rect_round_corners_400"
             android:layout_height="wrap_content">
             <com.elf.elfstudent.CustomUI.UbuntuRegular
                 android:text="Correct Answers"
@@ -111,6 +116,7 @@
 
             <TextView
                 android:text="35"
+                android:textColor="@color/material_green900"
                 android:textSize="22sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

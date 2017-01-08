@@ -12,10 +12,38 @@ public class Topic {
 
     private String topicName;
     private String points;
+    private String questionAsked;
+    private String correctanswer;
 
-    public Topic(String topicName, String points) {
-        this.topicName = topicName;
-        this.points = points;
+
+    public Topic(String name, String percentage, String questionAsked, String correctAnswer) {
+        this.topicName = name;
+        this.points = percentage;
+        this.questionAsked = questionAsked;
+        this.correctanswer = correctAnswer;
+
+
+
+    }
+
+    public Topic(String s) {
+        this.topicName = s;
+    }
+
+    public String getQuestionAsked() {
+        return questionAsked;
+    }
+
+    public void setQuestionAsked(String questionAsked) {
+        this.questionAsked = questionAsked;
+    }
+
+    public String getCorrectanswer() {
+        return correctanswer;
+    }
+
+    public void setCorrectanswer(String correctanswer) {
+        this.correctanswer = correctanswer;
     }
 
     public String getTopicName() {

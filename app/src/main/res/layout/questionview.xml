@@ -4,30 +4,10 @@
     android:layout_width="match_parent"
     android:fillViewport="true"
     xmlns:android="http://schemas.android.com/apk/res/android" >
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
-
-
-    android:layout_height="match_parent">
-
-
-
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_marginTop="8dp"
         android:layout_height="match_parent">
-        <com.elf.elfstudent.CustomUI.HelviticaLight
-            android:layout_width="match_parent"
-            android:textStyle="bold"
-            android:textColor="@color/material_grey800"
-            android:gravity="center_vertical|start"
-            android:textSize="@dimen/question_text_size"
-            android:text="This sis a aquestion a really a big question please make sure to add left or roght and tutorila by today"
-            android:id="@+id/test_question_text"
-            android:layout_marginTop="@dimen/que_mtop"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_height="wrap_content" />
 
         <View
             android:layout_width="match_parent"
@@ -87,9 +67,22 @@
 
         </RadioGroup>
 
+        <com.elf.elfstudent.CustomUI.DroidMono
+            android:layout_width="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/material_grey800"
+            android:gravity="center_vertical|start"
+            android:textSize="@dimen/question_text_size"
+            android:text="This sis a aquestion a really a big question please make sure to add left or roght and tutorila by today"
+            android:id="@+id/test_question_text"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
 
     </RelativeLayout>
 
 
-</FrameLayout>
     </ScrollView>

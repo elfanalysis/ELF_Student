@@ -61,7 +61,10 @@ import static com.elf.elfstudent.Adapters.ReportLessonAdapter.LessonView;
  * Gets The OVerall Percentage , lesson List and shows them in lIst
  * clicking on List , will show them topic wise
  */
-public class ReportFragment extends Fragment implements LessonClickCallbacks, LessonProvider.SubjectLoaderCallback, ErrorHandler.ErrorHandlerCallbacks {
+public class ReportFragment extends Fragment implements
+        LessonClickCallbacks,
+        LessonProvider.SubjectLoaderCallback,
+        ErrorHandler.ErrorHandlerCallbacks {
 
 
     private static final String TAG = "REPORT_FRAG";

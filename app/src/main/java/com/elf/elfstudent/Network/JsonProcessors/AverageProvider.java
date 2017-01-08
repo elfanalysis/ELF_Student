@@ -4,8 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import com.android.volley.Response;
-import com.elf.elfstudent.Activities.SubjectViewActivity;
-import com.elf.elfstudent.model.Lesson;
 import com.elf.elfstudent.model.Topic;
 
 import org.json.JSONArray;
@@ -20,6 +18,7 @@ import java.util.List;
  */
 public class AverageProvider implements Response.Listener<JSONArray> {
 
+    private static final String TAG = "Average Provider";
     List<Topic> averageList = null;
     List<Topic> goodList = null;
     List<Topic> badList = null;
@@ -37,52 +36,90 @@ public class AverageProvider implements Response.Listener<JSONArray> {
 
 
         try {
-            JSONArray average;
-            JSONArray good;
-            JSONArray bad;
+            JSONArray average = null;
+            JSONArray good = null;
+            JSONArray bad = null;
 
             JSONObject mObject = response.getJSONObject(0);
             if (mObject == null) {
                     mCallback.noProvider();
             } else {
 
-            if (mObject.getJSONArray("Average") != null){
+                //Resposne Exists
 
-                average = mObject.getJSONArray("Average");
+
+                //First Try to get Average
+                try {
+                    average  = mObject.getJSONArray("Average");
+
+                }
+                catch (Exception  e){
+                    //there is exception here , average is likely to be object here
+                    String averageObject = mObject.getString("Average");
+                    averageList = new ArrayList<>(1);
+                    averageList.add(new Topic("Write More Test To improve your Performance"));
+                }
+            if (average != null){
+                Log.d(TAG, "onResponse: after if");
+
                 averageList = new ArrayList<>(average.length());
                 for (int i = 0; i < average.length(); i++) {
                     JSONObject obj = average.getJSONObject(i);
-                    averageList.add(new Topic(obj.getString("Topic"), obj.getString("Percentage")));
+                    averageList.add(new Topic(obj.getString("Topic")));
                 }
             }
                 else{
+
                 averageList = new ArrayList<>(1);
             }
 
 
-                if (mObject.getJSONArray("Good") != null  ){
+                //Parse Good similartly
+                try {
+                    good  = mObject.getJSONArray("Good");
 
-                    good = mObject.getJSONArray("Good");
+                }
+                catch (Exception  e){
+                    //there is exception here , average is likely to be object here
+                    String goodobject = mObject.getString("Average");
+                    goodList = new ArrayList<>(1);
+                    goodList.add(new Topic("Write More Test To improve your Performance"));
+                }
+
+                if (good != null  ){
+
                     goodList = new ArrayList<>(good.length());
                     for (int i = 0; i < good.length(); i++) {
                         JSONObject obj = good.getJSONObject(i);
-                        goodList.add(new Topic(obj.getString("Topic"), obj.getString("Percentage")));
+                        goodList.add(new Topic(obj.getString("Topic")));
                     }
                 }
                 else{
-                    if (mObject.getJSONArray("Good").equals(null) || mObject.getJSONObject("Good").equals(null)  )
-                    goodList =null;
+                    String goodobject = mObject.getString("Good");
+                    goodList = new ArrayList<>(1);
+                    goodList.add(new Topic("Write More Test To improve your Performance"));
                 }
 
 
-                if (mObject.getJSONArray("Bad") != null){
+                //Parse For Bad..
+                try {
+                    bad  = mObject.getJSONArray("Bad");
 
-                    bad = mObject.getJSONArray("Bad");
+                }
+                catch (Exception  e){
+                    //there is exception here , average is likely to be object here
+                    String badObj = mObject.getString("Bad");
+                    goodList = new ArrayList<>(1);
+                    goodList.add(new Topic("Write More Test To improve your Performance"));
+                }
+
+                if (bad != null){
+
                     badList = new ArrayList<>(bad.length());
 
                     for (int i = 0; i < bad.length(); i++) {
                         JSONObject obj = bad.getJSONObject(i);
-                        badList.add(new Topic(obj.getString("Topic"), obj.getString("Percentage")));
+                        badList.add(new Topic(obj.getString("Topic")));
                     }
                 }
 

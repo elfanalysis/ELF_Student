@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.elf.elfstudent.Adapters.ViewPagerAdapters.TestCompletedPagerAdapter;
+import com.elf.elfstudent.CustomUI.titleTextview;
 import com.elf.elfstudent.DataStorage.DataStore;
 import com.elf.elfstudent.Network.AppRequestQueue;
 import com.elf.elfstudent.Network.ErrorHandler;
@@ -58,6 +59,8 @@ public class TestCompletedActivity extends AppCompatActivity implements ErrorHan
     @BindView(R.id.test_completed_tab)
     TabLayout mTab;
 
+    @BindView(R.id.title_text_toolbar)
+    titleTextview titleText;
 
     //The Drop Down Icon
     @BindView(R.id.tool_bar_drop)
@@ -88,6 +91,9 @@ public class TestCompletedActivity extends AppCompatActivity implements ErrorHan
 
 
 
+
+
+        titleText.setText("Test Analysis");
 
 
 

@@ -1,11 +1,13 @@
 package com.elf.elfstudent.Activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -34,6 +36,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by nandhu on 31/10/16.
+ *
  */
 
 public class FeedbackActivity extends AppCompatActivity implements ErrorHandler.ErrorHandlerCallbacks {
@@ -119,6 +122,8 @@ public class FeedbackActivity extends AppCompatActivity implements ErrorHandler.
         mRequestObject = new JSONObject();
         try {
 
+            Log.d(TAG, "submitFeedback: ");
+
             mRequestObject.put("UserId",mStore.getStudentId());
             mRequestObject.put("UserType", "Student");
             mRequestObject.put("Feedback", text);
@@ -129,13 +134,13 @@ public class FeedbackActivity extends AppCompatActivity implements ErrorHandler.
         mRequest = new JsonArrayRequest(Request.Method.POST, WebServices.FEED_URL, mRequestObject, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-
+                Log.d(TAG, "onResponse: "+response.toString());
                 try {
 
                     JSONObject mOb = response.getJSONObject(0);
-                    if (mOb.getString("Statuscode").equals("Success")) {
-                        Toast.makeText(getApplicationContext(), "Feedback sent, Thanks for Sharing you valuable opinion", Toast.LENGTH_LONG).show();
-                        startMainAcrvity();
+                    if (mOb.getString("StatusCode").equals("1000")) {
+
+                        showDialog();
                     } else {
 
                         Toast.makeText(getApplicationContext(), "Feedback Not Sent , Please try again Some time Later", Toast.LENGTH_LONG).show();
@@ -147,14 +152,27 @@ public class FeedbackActivity extends AppCompatActivity implements ErrorHandler.
             }
         }, errorHandler);
 
-        final Intent in1  = new Intent(this,HomeActivity.class);
-        startActivity(in1);
 
         if (mRequestQueue != null) {
             mRequestQueue.addToRequestQue(mRequest);
         }
 
 
+    }
+
+    private void showDialog() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle("Feedback Submitted");
+        alertDialog.setMessage("Thank you for your feedback");
+        alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+               startMainAcrvity();
+            }
+        });
+
+        alertDialog.show();
     }
 
     private void startMainAcrvity() {

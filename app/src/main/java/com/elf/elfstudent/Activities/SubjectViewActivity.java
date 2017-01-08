@@ -351,8 +351,18 @@ public class SubjectViewActivity extends AppCompatActivity implements
 
         }
         catch (Exception e ){
+            Log.d(TAG, "avgProvider: nexception");
+            Log.d(TAG, "avgProvider: in ");
            mChangableRoot.removeAllViews();
             View no_data  = View.inflate(this,R.layout.no_data,mChangableRoot);
+
+            Button mButton = (Button) no_data.findViewById(R.id.view_test);
+            mButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ShowtestWritePage();
+                }
+            });
         }
     }
 
@@ -365,6 +375,8 @@ public class SubjectViewActivity extends AppCompatActivity implements
 
     @Override
     public void noProvider() {
+
+        Log.d(TAG, "noProvider: ");
         try {
             mChangableRoot.removeAllViews();
             View noList = View.inflate(this,R.layout.no_data,mChangableRoot);

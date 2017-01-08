@@ -3,8 +3,10 @@
 
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="@color/white"
+    app:cardBackgroundColor="@color/material_grey200"
     app:cardCornerRadius="1dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="8dp"
     app:cardPreventCornerOverlap="true"
     android:layout_height="wrap_content">
 
@@ -40,7 +42,8 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/topic_item_ts"
                 android:gravity="center"
-                android:textColor="@color/md_orange900"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black_900"
                 android:layout_alignTop="@+id/topic_name_item"
                 android:layout_marginRight="45dp"
                 android:id="@+id/points_topic_item"
@@ -58,7 +61,10 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_below="@id/view"
-            android:background="#fee7e7"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/rect_round_corners_400"
             android:layout_height="wrap_content">
             <com.elf.elfstudent.CustomUI.UbuntuRegular
                 android:text="Correct Answers"
@@ -107,6 +113,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/report_item_ans_correct"
+                android:textColor="@color/material_green900"
                 android:layout_alignBaseline="@+id/report_item_total_ques"
                 android:layout_alignBottom="@+id/report_item_total_ques"
                 android:layout_alignRight="@+id/textView35"

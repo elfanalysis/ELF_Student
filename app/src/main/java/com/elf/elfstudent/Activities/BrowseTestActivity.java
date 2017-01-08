@@ -21,10 +21,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.elf.elfstudent.Adapters.ViewPagerAdapters.tenthTestPagerAdapter;
+import com.elf.elfstudent.CustomUI.titleTextview;
 import com.elf.elfstudent.DataStorage.DataStore;
 import com.elf.elfstudent.Fragments.AllTestFragment;
 import com.elf.elfstudent.R;
 import com.elf.elfstudent.Utils.ScreenUtil;
+import com.elf.elfstudent.Utils.Server_Values;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -90,7 +92,8 @@ public class BrowseTestActivity extends AppCompatActivity {
 
 
 
-
+    @BindView(R.id.title_text_toolbar)
+    titleTextview titleText;
     DataStore mStore = null;
     private String classId;
     private boolean isDrawerShowing =false;
@@ -102,6 +105,8 @@ public class BrowseTestActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         mStore = DataStore.getStorageInstance(this);
         Log.d(TAG, "onCreate: ");
+
+        titleText.setText("Write Tests");
         setPagerAdapter();
         setSupportActionBar(mToolbar);
         setUpCustomDrawer();
@@ -131,7 +136,7 @@ public class BrowseTestActivity extends AppCompatActivity {
             if (classId != null){
 
 
-                if (classId.equals("1")){
+                if (classId.equals(Server_Values.TENTH_CLASS_ID)){
 
                     //user is 10
                     Log.d(TAG, "setPagerAdapter: tenth standat");
@@ -141,6 +146,7 @@ public class BrowseTestActivity extends AppCompatActivity {
                 else{
                     //he is 12 , get the group
                     String group = mStore.getStudentGroup();
+                    Log.d(TAG, "setPagerAdapter: "+group);
 
                     if (group.equals("COMPUTER")){
                         Log.d(TAG, "Computer student");

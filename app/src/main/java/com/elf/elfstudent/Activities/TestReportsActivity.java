@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.elf.elfstudent.Adapters.TestReportsAdapter;
+import com.elf.elfstudent.CustomUI.titleTextview;
 import com.elf.elfstudent.DataStorage.DataStore;
 import com.elf.elfstudent.Network.AppRequestQueue;
 import com.elf.elfstudent.Network.ErrorHandler;
@@ -84,7 +85,8 @@ public class TestReportsActivity extends AppCompatActivity
     private AppRequestQueue mRequestQueue;
 
     JsonArrayRequest mRequest = null;
-
+    @BindView(R.id.title_text_toolbar)
+    titleTextview titleText;
 
     List<TestReportModel> mTestListdata = null;
     private boolean isDrawerShowing =false;
@@ -94,6 +96,8 @@ public class TestReportsActivity extends AppCompatActivity
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+//        titleText.setText("Test Summaries");
         setContentView(R.layout.test_report_activity);
         ButterKnife.bind(this);
 

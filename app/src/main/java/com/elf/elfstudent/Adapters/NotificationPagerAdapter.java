@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.elf.elfstudent.Fragments.EventsFragement;
+import com.elf.elfstudent.Fragments.NotificationFragment.EventsFragement;
 import com.elf.elfstudent.Fragments.RequestFragment;
 
 /**

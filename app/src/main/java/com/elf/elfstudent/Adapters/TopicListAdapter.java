@@ -14,6 +14,8 @@ import com.elf.elfstudent.R;
 import com.elf.elfstudent.Utils.ScreenUtil;
 import com.elf.elfstudent.model.Topic;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -77,8 +79,8 @@ public class  TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Top
         runEnterAnimations(holder,position);
         holder.TopicName.setText(topicList.get(position).getTopicName());
         holder.mPoints.setText(String.valueOf((int)Float.parseFloat(topicList.get(position).getPoints())));
-
-
+        holder.mAnswerCorrect.setText(topicList.get(position).getCorrectanswer());
+        holder.mQuestionAsked.setText(topicList.get(position).getQuestionAsked());
     }
 
     @Override
@@ -95,6 +97,10 @@ public class  TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Top
         //Points in Topic
         @BindView(R.id.points_topic_item)
         TextView mPoints;
+
+        @BindView(R.id.report_item_total_ques) TextView mQuestionAsked;
+        @BindView(R.id.report_item_ans_correct)
+        TextView mAnswerCorrect;
 
 
 

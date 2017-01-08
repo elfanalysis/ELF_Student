@@ -15,13 +15,17 @@ android:layout_height="match_parent">
         android:orientation="vertical">
 
 
-    <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/contct_us_tlb"
-        android:layout_marginTop="20dp">
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.Toolbar
+                android:layout_width="match_parent"
+                android:id="@+id/contact_us_toolbar"
+                android:layout_gravity="center"
+                android:layout_height="?attr/actionBarSize">
 
-    </android.support.v7.widget.Toolbar>
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
 
 
     <ImageView
@@ -38,7 +42,7 @@ android:layout_height="match_parent">
         android:textColor="#000000"
         android:gravity="center"
         android:id="@+id/email_id"
-        android:layout_marginTop="40dp" />
+        android:layout_marginTop="@dimen/contactus_text_top" />
 
 
 
@@ -50,7 +54,7 @@ android:layout_height="match_parent">
         android:gravity="center"
         android:textColor="#ff4d79"
         android:id="@+id/emailid_name"
-        android:layout_marginTop="40dp" />
+        android:layout_marginTop="@dimen/contactus_text_top" />
 
     <TextView
         android:layout_width="match_parent"
@@ -60,7 +64,7 @@ android:layout_height="match_parent">
         android:textColor="#000000"
         android:gravity="center"
         android:id="@+id/contact_id"
-        android:layout_marginTop="40dp" />
+        android:layout_marginTop="@dimen/contactus_text_top" />
 
 
     <TextView
@@ -71,21 +75,36 @@ android:layout_height="match_parent">
         android:gravity="center"
         android:textColor="#ff4d79"
         android:id="@+id/contact_no"
-        android:layout_marginTop="40dp" />
+        android:layout_marginTop="@dimen/contactus_text_top" />
 
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="www.elfanalysis.com"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="@dimen/contactus_text_top"
         android:gravity="center"
         android:id="@+id/hyperlink"
         android:autoLink="web"
+        android:textColorLink="@color/blue400"
         android:textSize="20dp"
         />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Share to our Friends"
+            android:layout_marginTop="@dimen/contactus_bt_top"
+            android:id="@+id/shareit"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:background="@drawable/pink_login_rounded"
+            android:layout_marginLeft="55dp"
+            android:layout_marginRight="55dp"
+            android:typeface="serif"/>
 
 </LinearLayout>
 
     </ScrollView>
+
 </LinearLayout>

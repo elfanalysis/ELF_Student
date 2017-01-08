@@ -105,7 +105,7 @@
     <dimen name="login_tx15_top">212dp</dimen>
     <dimen name="login_embox_top">22dp</dimen>
     <dimen name="login_txt21_top">74dp</dimen>
-    <dimen name="login_bt_top">110dp</dimen>
+    <dimen name="login_bt_top">140dp</dimen>
     <dimen name="nodata_img_top">67dp</dimen>
     <dimen name="nodata_txt15_size">26sp</dimen>
     <dimen name="nointrnt_img_hight">100dp</dimen>

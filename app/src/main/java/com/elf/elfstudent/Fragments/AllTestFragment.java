@@ -28,6 +28,7 @@ import com.elf.elfstudent.Network.JsonProcessors.TestListProvider;
 import com.elf.elfstudent.R;
 import com.elf.elfstudent.Utils.BundleKey;
 import com.elf.elfstudent.Utils.RVdecorator;
+import com.elf.elfstudent.Utils.Server_Values;
 import com.elf.elfstudent.Utils.SubjectImage;
 import com.elf.elfstudent.model.AllTestModels;
 import com.elf.elfstudent.model.TestPageParentModel;
@@ -308,7 +309,7 @@ public class AllTestFragment extends Fragment implements
 
         //we have all Test for this student {@param mTests }
 
-        if(mStore.getStandard().equals("1")){
+        if(mStore.getStandard().equals(Server_Values.TENTH_CLASS_ID)){
             //Student is 10th Prepare Adapter Accodringly
             TestPageParentModel Science_q = new TestPageParentModel(SubjectImage.SCIENCE_ID, getTestsbySubjectId(SubjectImage.SCIENCE_ID,mTests));
             TestPageParentModel social_q  = new TestPageParentModel(SubjectImage.SOCIAL_ID,getTestsbySubjectId(SubjectImage.SOCIAL_ID,mTests));

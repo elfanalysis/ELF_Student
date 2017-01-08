@@ -322,7 +322,6 @@ public class SingleSubjectReportActivity  extends AppCompatActivity implements
                 if (mTopicListView != null && mAdapter != null){
                     adapterSet  = true;
                     mTopicListView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    mTopicListView.addItemDecoration(new RVdecorator(ContextCompat.getDrawable(getApplicationContext(),R.drawable.divider)));
                     mTopicListView.setAdapter(mAdapter);
                 }
                 else{

@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
 
 import com.elf.elfstudent.Fragments.AllTestFragment;
-import com.elf.elfstudent.Fragments.AllTestFragment12;
 import com.elf.elfstudent.Fragments.PublicTestFragmet;
 import com.elf.elfstudent.Fragments.RecommendedTestFragment;
 import com.elf.elfstudent.Utils.BundleKey;

@@ -14,4 +14,7 @@
     <string name="loading">loading</string>
     <string name="server_id">AIzaSyDbvvoPr2UMiaxn9zvu256w4_WIdle8pZc</string>
     <string name="open_source_licences">Open-Source Licences</string>
+    <string name="good_text"><u>Good Performing Topics</u></string>
+    <string name="average"><u>Average Performing Topics</u></string>
+    <string name="needs_focusing"><u>Needs Focusing</u></string>
 </resources>
