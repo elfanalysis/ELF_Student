@@ -102,7 +102,7 @@ protected void onCreate(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.email_activity);
         ButterKnife.bind(this);
 
-        loadBitmap(R.drawable.welcome_back,mBackImage);
+//        loadBitmap(R.drawable.welcome_back,mBackImage);
 
 
 

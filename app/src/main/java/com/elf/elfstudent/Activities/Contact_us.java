@@ -30,7 +30,7 @@ public class Contact_us extends AppCompatActivity {
 
 
 
-    @BindView(R.id.contct_us_tlb)
+    @BindView(R.id.contact_us_toolbar)
     Toolbar toolbar;
 
     @Override

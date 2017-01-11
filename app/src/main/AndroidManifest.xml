@@ -38,6 +38,9 @@
         <activity android:name=".Activities.TestWriteActivity"
             android:exported="true"/>
 
+
+        <activity android:name=".Activities.SubjectActivity"
+            android:exported="true"/>
         <activity android:name=".Activities.RegisterActivity"/>
         <activity android:name=".Activities.LoginActivity"
             android:exported="true"/>
@@ -62,7 +65,7 @@
         <activity android:name=".Activities.NotificationsActivity"/>
 
         <activity android:name=".Activities.PaymentActivity"/>
-        <activity android:name=".Activities.Logout"></activity>
+
 
         <activity android:name=".Activities.AboutUsActivity"/>
         <activity android:name=".Activities.Contact_us"/>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.android.volley.Response;
+import com.elf.elfstudent.Fragments.New_Fragments.PerFormanceFragment;
 import com.elf.elfstudent.model.Topic;
 
 import org.json.JSONArray;
@@ -15,6 +16,7 @@ import java.util.List;
 
 /**
  * Created by nandhu on 12/12/16.
+ *
  */
 public class AverageProvider implements Response.Listener<JSONArray> {
 
@@ -27,6 +29,8 @@ public class AverageProvider implements Response.Listener<JSONArray> {
     public AverageProvider(Context context) {
         this.mCallback  = (avgCallback) context;
     }
+
+
 
 
     @Override

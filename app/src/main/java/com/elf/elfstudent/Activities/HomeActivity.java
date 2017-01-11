@@ -703,6 +703,11 @@ public class HomeActivity extends AppCompatActivity implements ErrorHandler.Erro
                 DropButtonClicked();
             }
 
+
+//
+//
+/*
+
             HelviticaLight percentText = (HelviticaLight) itemView.findViewById(R.id.percent);
             String percentTransName = ViewCompat.getTransitionName(percentText);
 
@@ -734,15 +739,36 @@ public class HomeActivity extends AppCompatActivity implements ErrorHandler.Erro
 
 
             ActivityOptionsCompat options = makeSceneTransitionAnimation(this, p1, p3);
+
             if (ScreenUtil.isAndroid5()) {
 
                 startActivity(i, options.toBundle());
             } else {
                 startActivity(i);
             }
+             */
+
+            Intent i = new Intent(this, SubjectActivity.class);
+//            i.putExtra(BundleKey.PERCENTAGE, percentText.getText());
+            i.putExtra(BundleKey.SUBJECT_ID, mSubjectList.get(position).getmSubjectId());
+            //Putting Transition Name Values
+//                i.putExtra(BundleKey.HOME_SUBJECT_TRANS_NAME,subTransName);           i.p
+            i.putExtra(BundleKey.ARG_STUDENT_ID, studnetId);
+//            i.putExtra(BundleKey.HOME_PERCENT_TRANS_NAME, percentTransName);
+//
+//            i.putExtra(BundleKey.HOME_SUBJECT_IMAGE_TRANS_NAME, img_trans_name);
+
+            //send Subject iD to NExt Activity
+//            i.putExtra(BundleKey.SUBJECT_ID, mSubjectList.get(position).getmSubjectId());
+            startActivity(i);
+
+
+
         } catch (Exception e) {
             Log.d(TAG, "InfoButtonClicked: Exception " + e.getLocalizedMessage());
         }
+
+
     }
 
     @Override

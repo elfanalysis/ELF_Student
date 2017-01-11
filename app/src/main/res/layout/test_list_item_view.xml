@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="80dp">
+    <TextView
+        android:layout_width="match_parent"
+        android:text="This is a relaly long Chaopter"
+        android:textColor="@color/black_900"
+        android:gravity="center_vertical|left"
+        android:paddingLeft="16dp"
+        android:id="@+id/test_list_item_ts"
+        android:layout_height="match_parent" />
+
+</android.support.v7.widget.CardView>

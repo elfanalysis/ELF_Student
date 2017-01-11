@@ -122,6 +122,7 @@ public class ReportFragment extends Fragment implements
 
     private Context mContext = null;
     private int count = 0;
+    private static ReportFragment mFragment = null;
 
     @Nullable
     @Override
@@ -142,7 +143,7 @@ public class ReportFragment extends Fragment implements
         if (getArguments() != null) {
             subjecId = getArguments().getString(BundleKey.SUBJECT_ID);
             Log.d(TAG, "onCreateView: subject iD For this Fragment " + subjecId);
-            subjectName = getArguments().getString(BundleKey.SUBJECT_NAME);
+//            subjectName = getArguments().getString(BundleKey.SUBJECT_NAME);
 
         }
         else{
@@ -482,5 +483,22 @@ public class ReportFragment extends Fragment implements
     @Override
     public void ServerError() {
         FirebaseCrash.log("server error , top priority to look into");
+    }
+
+    /*A Static methdods which  provides Fragment*/
+    public static ReportFragment newInstance(String subejctId, String studentId) {
+
+        if (mFragment == null){
+            mFragment = new ReportFragment();
+        }
+
+        //Add Fragment Param' s here
+        Bundle b =  new Bundle();
+        b.putString(BundleKey.SUBJECT_ID,subejctId);
+        b.putString(BundleKey.ARG_STUDENT_ID,studentId);
+        mFragment.setArguments(b);
+
+
+        return mFragment;
     }
 }

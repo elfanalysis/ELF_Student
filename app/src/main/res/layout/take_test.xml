@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:text="Write test For your Favourite Chapters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView40"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="54dp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textView40"
+        android:layout_alignLeft="@+id/textView40"
+        android:layout_alignStart="@+id/textView40"
+        android:layout_marginTop="21dp"
+        android:layout_alignRight="@+id/textView40"
+        android:layout_alignEnd="@+id/textView40"
+        android:id="@+id/mTestListView" />
+</RelativeLayout>
